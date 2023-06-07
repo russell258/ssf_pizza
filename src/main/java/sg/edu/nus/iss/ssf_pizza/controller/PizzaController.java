@@ -1,8 +1,13 @@
 package sg.edu.nus.iss.ssf_pizza.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,17 +15,30 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import sg.edu.nus.iss.ssf_pizza.model.Delivery;
 import sg.edu.nus.iss.ssf_pizza.model.Pizza;
+import sg.edu.nus.iss.ssf_pizza.service.PizzaService;
 
 @Controller
-@RequestMapping(consumes="application/x-www-form-url-encoded")
+@RequestMapping(consumes=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 public class PizzaController {
     
+    @Autowired
+    private PizzaService pizzaSvc;
+
     @PostMapping(path="/pizza")
     public String postPizza(Model m, HttpSession session, @Valid Pizza pizza, BindingResult result){
         
         if(result.hasErrors()){
             return "index";
         }
+
+        List<ObjectError> errors = pizzaSvc.validatePizzaOrder(pizza);
+        if(!errors.isEmpty()){
+            for (ObjectError e:errors){
+                result.addError(e);
+            }
+            return "index";
+        }
+
         session.setAttribute("pizza", pizza);
         m.addAttribute("delivery", new Delivery());
         return "delivery";

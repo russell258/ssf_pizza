@@ -59,6 +59,11 @@
 							</div>
 						</td>
 					</tr>
+					<tr data-th-if="${#fields.hasErrors('pizza')}">
+						<td>
+							<span data-th-errors="*{pizza}" data-th-errorclass="error"></span>
+						</td>
+					</tr>
 					<tr>
 						<td>Size:</td>
 						<td>
@@ -69,10 +74,19 @@
 							</select>
 						</td>
 					</tr>
+					<!-- link the error from service to here -->
+					<tr data-th-if="${#fields.hasErrors('pizza')}">
+						<td>
+							<span data-th-errors="*{size}" data-th-errorclass="error"></span>
+						</td>
+					</tr>
 					<tr>
 						<td>Quantity:</td>
 						<td>
 							<input type="number" min="1" name="quantity" field="*{quantity}"> 
+							<div data-th-if="${#fields.hasErrors('quantity')}">
+								<span data-th-errors="*{quantity}" data-th-errorclass="error"></span>
+							</div>
 						</td>
 					</tr>
 					<tr>

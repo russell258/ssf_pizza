@@ -50,7 +50,7 @@ public class PizzaService {
         }
 
         if (!pizzaSizes.contains(p.getSize().toLowerCase())){
-            error = new FieldError("pizza","size","We do not have the following %s pizz size"
+            error = new FieldError("pizza","size","We do not have the following %s pizza size"
             .formatted(p.getSize()));
             errors.add(error);
         }

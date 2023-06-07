@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery</title>
+</head>
+<body>
+    <div class = "container" border-style="solid">
+        <h1>Order Delivery Details</h1>
+        <br>
+        <form method="POST" data-th-action="@{/pizza/order}" data-th-object="${delivery}">
+            <p>
+                Name:
+                <input type="text" data-th-field="*{name}"/>
+            <br/>
+            <span data-th-errorClass = "error" data-th-if = "${#fields.hasErrors('name')}" data-th-errors = "*{name}" style="color: red
+            ;"></span>
+            </p>
+            <br/>
+            <p>
+                Address:
+                <input type="text" data-th-field="*{address}"/>
+            <br/>
+            <span data-th-errorClass = "error" data-th-if = "${#fields.hasErrors('address')}" data-th-errors = "*{address}" style="color: red
+            ;"></span>
+            </p>
+            <br/>
+            <p>
+                Phone Number:
+                <input type="tel" data-th-field="*{phoneNumber}"/>
+            <br/>
+            <span data-th-errorClass = "error" data-th-if = "${#fields.hasErrors('phoneNumber')}" data-th-errors = "*{phoneNumber}" style="color: red
+            ;"></span>
+            </p>
+            <br/>
+            <!-- insert the Rush checkbox here -->
+            <p>
+                Is Rush:
+                <input type="checkbox" data-th-field = "*{rush}">
+                <span data-th-errorClass="error" data-th-errors="*{rush}"></span>
+            </p>
+
+            <p>
+                Comments:
+                <input type="text" data-th-field="*{comments}"/>
+            <br/>
+            <span data-th-errorClass = "error" data-th-if = "${#fields.hasErrors('comments')}" data-th-errors = "*{comments}" style="color: red
+            ;"></span>
+            </p>
+            <br/>
+
+            <P>
+                <button type = "submit" formMethod="GET" formaction="/">Cancel Order</button>
+                <button type = "submit">Place Order</button>
+            </P>
+        </form>
+    </div>
+    
+</body>
+</html>
