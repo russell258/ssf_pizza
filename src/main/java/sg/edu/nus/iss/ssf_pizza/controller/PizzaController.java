@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import sg.edu.nus.iss.ssf_pizza.model.Delivery;
+import sg.edu.nus.iss.ssf_pizza.model.Order;
 import sg.edu.nus.iss.ssf_pizza.model.Pizza;
 import sg.edu.nus.iss.ssf_pizza.service.PizzaService;
 
@@ -42,6 +43,18 @@ public class PizzaController {
         session.setAttribute("pizza", pizza);
         m.addAttribute("delivery", new Delivery());
         return "delivery";
+    }
+
+    @PostMapping(path="/pizza/order")
+    public String postPizzaOrder(Model model, HttpSession session, @Valid Delivery delivery, BindingResult result){
+        if (result.hasErrors()){
+            return "delivery";
+        }
+
+        Pizza p = (Pizza) session.getAttribute("pizza");
+        Order o = pizzaSvc.savePizza(p,delivery);
+        model.addAttribute("order",o);
+        return "order";
     }
 
 }

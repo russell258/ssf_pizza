@@ -56,7 +56,7 @@ public class Order implements Serializable{
 
     //total cost will not include rush, try different
     public double getPizzaCost(){
-        return this.getRush() ? this.getTotalCost() + 2 : this.getTotalCost();
+        return this.getRush() ? this.getTotalCost() - 2 : this.getTotalCost();
     }
 
     //convert string to json object
