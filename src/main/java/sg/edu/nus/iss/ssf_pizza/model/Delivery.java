@@ -60,9 +60,9 @@ public class Delivery implements Serializable{
     
     public static Delivery create(JsonObject o){
         Delivery d = new Delivery();
-        d.setName(o.getString("name"));
-        d.setAddress(o.getString("address"));
-        d.setPhoneNumber(o.getString("phoneNumber"));
+        d.setName(o.getJsonString("name").toString());
+        d.setAddress(o.getJsonString("address").toString());
+        d.setPhoneNumber(o.getJsonString("phone").toString()); //<<<LOOK LATER
         d.setRush(o.getBoolean("rush"));
         d.setComments(o.getString("comments"));
         System.out.println(d.toString());

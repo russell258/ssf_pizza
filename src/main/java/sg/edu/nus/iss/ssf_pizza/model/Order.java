@@ -10,7 +10,7 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 
 public class Order implements Serializable{
-    private String id;
+    private String orderId;
     private double totalCost=0;
     private Pizza pizza;
     private Delivery delivery;
@@ -20,11 +20,11 @@ public class Order implements Serializable{
         this.delivery = d;
     }
 
-    public String getId() {
-        return id;
+    public String getOrderId() {
+        return orderId;
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
     public double getTotalCost() {
         return totalCost;
@@ -70,15 +70,17 @@ public class Order implements Serializable{
         JsonObject o = toJSON(jsonStr);
         Pizza p = Pizza.create(o);
         Delivery d = Delivery.create(o);
+        //error points to above^^ phone not phoneNumber
+        System.out.println("TEST if ITS PASSING THROUGH 8.35pm");
         Order ord = new Order(p, d);
-        ord.setId(o.getString("orderId"));
+        ord.setOrderId(o.getJsonString("orderId").toString());
         ord.setTotalCost(o.getJsonNumber("total").doubleValue());
         return ord;
     }
 
     public JsonObject toJSON(){
         return Json.createObjectBuilder()
-            .add("orderId",this.getId())
+            .add("orderId",this.getOrderId())
             .add("name",this.getName())
             .add("address",this.getAddress())
             .add("phone",this.getPhoneNumber())

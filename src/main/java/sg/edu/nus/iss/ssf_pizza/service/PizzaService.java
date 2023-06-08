@@ -68,7 +68,7 @@ public class PizzaService {
     private Order createPizzaOrder(Pizza p, Delivery d){
         String orderId = UUID.randomUUID().toString().substring(0,8);
         Order o = new Order(p,d);
-        o.setId(orderId);
+        o.setOrderId(orderId);
         return o;
     }
 
@@ -114,11 +114,6 @@ public class PizzaService {
     }
 
     public Optional<Order> getOrderByOrderId(String orderId){
-        System.out.println("TEST TEST TEST TEST ORDER ID ORDER ID");
-        System.out.println("TEST TEST TEST TEST ORDER ID ORDER ID");
-        System.out.println("TEST TEST TEST TEST ORDER ID ORDER ID");
-        System.out.println("TEST TEST TEST TEST ORDER ID ORDER ID");
-        System.out.println("TEST TEST TEST TEST ORDER ID ORDER ID");
         return this.repository.get(orderId);
     }
 

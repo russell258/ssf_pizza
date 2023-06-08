@@ -26,7 +26,7 @@ public class PizzaRestController {
         Optional<Order> p = pSvc.getOrderByOrderId(orderId);
         if (p.isEmpty()){
             JsonObject error = Json.createObjectBuilder()
-                                    .add("message","Order $s is not found"
+                                    .add("message","Order %s is not found"
                                     .formatted(orderId))
                                     .build();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error.toString());
