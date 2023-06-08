@@ -65,6 +65,7 @@ public class Delivery implements Serializable{
         d.setPhoneNumber(o.getString("phoneNumber"));
         d.setRush(o.getBoolean("rush"));
         d.setComments(o.getString("comments"));
+        System.out.println(d.toString());
         return d;
     }
 }

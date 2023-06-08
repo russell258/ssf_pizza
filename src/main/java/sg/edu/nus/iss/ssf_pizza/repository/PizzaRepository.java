@@ -24,9 +24,14 @@ public class PizzaRepository {
     public Optional<Order> get(String orderId){
         String json = (String) template.opsForValue().get(orderId);
         if (null==json||json.trim().length()<=0){
+            System.out.println("REPOSITORY GETTING EMPTY");
+            System.out.println("REPOSITORY GETTING EMPTY");
+            System.out.println("REPOSITORY GETTING EMPTY");
+            System.out.println("REPOSITORY GETTING EMPTY");
             return Optional.empty();
         }
         //use the create order object from string method in the Order class
+        System.out.println("REPOSITORY HAS SOMETHING");
         return Optional.of(Order.create(json));
     }
 
